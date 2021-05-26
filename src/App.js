@@ -1,8 +1,12 @@
 import React from "react";
-import "./App.css";
+import PlashScreen from "./components/PlashScreen/PlashScreen";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div>
+      <PlashScreen />
+    </div>
+  );
 }
 
 export default App;
