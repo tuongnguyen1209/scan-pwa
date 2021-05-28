@@ -42,6 +42,13 @@ const ImgToList = (base64) => {
 
             })
         }
+
+        return () => {
+            setText('')
+            setErr('')
+            setIsSearch(false)
+            setListColor([])
+        }
     }, [base64])
 
 
@@ -67,6 +74,7 @@ const ImgToList = (base64) => {
                         return ''
                     }
                     console.log('new list', newList);
+                    setIsSearch(false)
                     setListColor(newList)
                 }
             }).catch(err => {
