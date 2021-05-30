@@ -22,13 +22,11 @@ function ColorInformation(props) {
 
     }
 
-    useEffect(() => {
-        console.log(touch);
-        if (touch.start > touch.end && touch.end > 0 && (touch.start - touch.end) > 300) {
-            console.log('voday');
-            handCancle()
-        }
-    }, [touch.end])
+    if (touch.start > touch.end && touch.end > 0 && (touch.start - touch.end) > 300) {
+        console.log('voday');
+        handCancle()
+    }
+
 
 
     return (
