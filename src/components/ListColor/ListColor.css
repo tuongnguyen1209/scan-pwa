@@ -65,6 +65,7 @@
   align-items: center;
   text-decoration: none;
   color: #4b4848;
+  cursor: pointer;
 }
 .loading {
   position: absolute;

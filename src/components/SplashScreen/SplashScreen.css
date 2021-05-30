@@ -3,6 +3,7 @@
   margin: auto;
   max-height: 100vh;
   height: 100vh;
+  animation: changebackground 2000ms ease-in-out;
 }
 .main-spash-screen {
   width: 100%;
@@ -16,9 +17,34 @@
   width: 70%;
   margin: auto;
 }
+@keyframes animatelog {
+  0% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  100% {
+    position: static;
+  }
+}
 .wrap-btn-scan {
   width: 30%;
   margin: auto;
+  animation-name: animatebtn;
+  animation-duration: 4s;
+}
+
+@keyframes animatebtn {
+  0% {
+    display: none;
+  }
+  90% {
+    display: none;
+  }
+  100% {
+    display: block;
+  }
 }
 .wrap-btn-scan .btn-scan {
   cursor: pointer;
@@ -33,5 +59,13 @@ img {
 @media only screen and (max-width: 1024px) {
   .splashScreen {
     width: 100%;
+  }
+}
+@keyframes changebackground {
+  0% {
+    background: black;
+  }
+  100% {
+    background: white;
   }
 }

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import close from "../../assets/img/close.png";
 import loading from "../../assets/img/loading.gif";
 import './ListColor.css';
@@ -16,14 +16,17 @@ function ListColor(props) {
 
     const { listItemColor, isSearch, err, handlClickColor, handCancle } = props
 
-    if (listItemColor.length === 1) {
-        handlClickColor(listItemColor[0]._id)
-        props.handlChangePage(4)
-    }
 
-    if (err !== '') {
-        props.handlChangePage(4)
-    }
+
+    useEffect(() => {
+        if (err !== '') {
+            props.handlChangePage(4)
+        }
+        if (listItemColor.length === 1) {
+            handlClickColor(listItemColor[0]._id)
+            props.handlChangePage(4)
+        }
+    }, [err, listItemColor])
 
     const handlClick = (id) => {
         handlClickColor(id);
