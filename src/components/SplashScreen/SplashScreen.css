@@ -3,7 +3,6 @@
   margin: auto;
   max-height: 100vh;
   height: 100vh;
-  animation: changebackground 2000ms ease-in-out;
 }
 .main-spash-screen {
   width: 100%;
@@ -59,13 +58,5 @@ img {
 @media only screen and (max-width: 1024px) {
   .splashScreen {
     width: 100%;
-  }
-}
-@keyframes changebackground {
-  0% {
-    background: black;
-  }
-  100% {
-    background: white;
   }
 }
