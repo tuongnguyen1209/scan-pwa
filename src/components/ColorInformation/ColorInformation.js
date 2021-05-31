@@ -1,14 +1,18 @@
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import ChangeColorText from "../../hooks/use_changeColorText";
+import { animateSlideToTop } from "../../Animation/Animation";
 import cart from "../../assets/img/cart.png";
 import close from "../../assets/img/close.png";
 import loading from "../../assets/img/loading.gif";
+import ChangeColorText from "../../hooks/use_changeColorText";
 import "./ColorInformation.css";
-import { motion } from "framer-motion";
-import { animateSlideToTop } from "../../Animation/Animation";
 
 function ColorInformation(props) {
-  const { colorinfo, errSearch, isSearch, handCancle } = props;
+  const { colorinfo, errCode, handCancle, text } = props;
+  const errorText = {
+    notResult: "Aucune correspondance trouvée",
+    notTex: "Nous n’avons pas pu lire votre référence. Merci de recommencer.",
+  };
   const [touch, setTouch] = useState({
     start: 0,
     end: 0,
@@ -35,14 +39,16 @@ function ColorInformation(props) {
     }
   }, [touch.end, handCancle, touch.start, touch]);
 
+  useEffect(() => console.log(colorinfo, errCode), [colorinfo, errCode]);
+
   return (
     <React.Fragment>
-      {isSearch && (
+      {errCode === -1 && (
         <div className="loading">
           <img src={loading} alt="Loading" />
         </div>
       )}
-      {!isSearch && (
+      {errCode !== -1 && (
         <motion.div
           initial="out"
           animate="in"
@@ -57,7 +63,13 @@ function ColorInformation(props) {
             <div
               className="content-top"
               style={{
-                backgroundColor: `${colorinfo.hexCode}`,
+                backgroundColor: `${
+                  errCode === 0
+                    ? colorinfo.hexCode
+                    : errCode === 1
+                    ? "#ff7f00"
+                    : "#fed000"
+                }`,
               }}
             >
               <div className="image-container-close">
@@ -69,11 +81,13 @@ function ColorInformation(props) {
                 <div className="row">
                   <div className="col ">
                     <h1 style={{ color: ChangeColorText(colorinfo.hexCode) }}>
-                      {isSearch
-                        ? "Loadding"
-                        : errSearch !== ""
-                        ? `${errSearch}`
-                        : `The color ${colorinfo.name} is displayed on the header background.`}
+                      {errCode === 0
+                        ? `${colorinfo.name}`
+                        : errCode === 1
+                        ? `${errorText.notTex}`
+                        : errCode === 2
+                        ? `${errorText.notResult}`
+                        : ""}
                     </h1>
                   </div>
                 </div>
@@ -83,12 +97,33 @@ function ColorInformation(props) {
               <div className="grid">
                 <div className="row">
                   <div className="col ">
-                    <p>{colorinfo.desc}</p>
+                    {errCode === 0 && <p> `${colorinfo.desc}` </p>}
+                    {errCode === 1 && (
+                      <p>
+                        Pour une reconnaissance optimale du texte, veuillez:
+                        <br />
+                        -Stabiliser votre appareil photo <br />
+                        -Vous assurer d’un éclairage suffisant <br />
+                        -Cadrer la photo de face si possible. <br />
+                      </p>
+                    )}
+                    {errCode === 2 && (
+                      <p>
+                        L’application a détecté la référence suivante : ${text}
+                        mais n’a trouvé aucune correspondance dans sa base de
+                        données. Une des raisons peut être la suivante : <br />
+                        -La base de données ne contient pas cette référence à ce
+                        stade du projet. <br />
+                        -La référence scannée comporte trop ou pas assez de
+                        texte afin d’être reconnue par notre application. <br />
+                        `
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-            {errSearch === "" && (
+            {errCode === 0 && (
               <div className="image-container1">
                 <img className="btn-cart" src={cart} alt="cart" />
               </div>

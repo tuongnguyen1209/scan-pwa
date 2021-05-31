@@ -8,13 +8,15 @@ const isEmpty = (obj) => {
 
 const ImgToColor = (base64) => {
   const [color, setColor] = useState({});
-  const [err, setErr] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
+  const [err, setErr] = useState(-1);
+  // 0 no error
+  // 1 "Can not scan the text, please try again"
+  // 2 don't have result
+
   const [text, setText] = useState("");
 
   useEffect(() => {
     if (base64 !== "") {
-      setIsSearch(true);
       let data = JSON.stringify({
         requests: [
           {
@@ -32,8 +34,7 @@ const ImgToColor = (base64) => {
       googleApiOcr.getText(data).then((response) => {
         if (isEmpty(response.responses[0])) {
           // console.log("Error");
-          setErr("Can not scan the text, please try again");
-          setIsSearch(false);
+          setErr(1);
         } else {
           setText(response.responses[0].fullTextAnnotation.text.trim());
         }
@@ -42,8 +43,8 @@ const ImgToColor = (base64) => {
 
     return () => {
       setText("");
-      setErr("");
-      setIsSearch(false);
+      setErr(-1);
+
       setColor({});
     };
   }, [base64]);
@@ -53,27 +54,26 @@ const ImgToColor = (base64) => {
       ColorApi.getColor(text)
         .then((data) => {
           console.log("data--", data);
-          let result = data.result;
-          console.log(result);
-          if (result === null) {
-            setErr(`Can not find any results with keywords ${text}`);
-            setIsSearch(false);
+
+          if (data.Colors.length === 0) {
+            setErr(2);
           } else {
-            setIsSearch(false);
-            setColor(result);
+            if (data.Colors[0]) {
+              setColor(data.Colors[0]);
+              setErr(0);
+            } else {
+              setErr(2);
+            }
           }
         })
         .catch((err) => {
           console.log(err);
-          setErr(`Can not find any results with keywords ${text}`);
-        })
-        .finally(() => {
-          setIsSearch(false);
+          setErr(2);
         });
     }
   }, [text]);
 
-  return [color, err, isSearch];
+  return [color, err, text];
 };
 
 export default ImgToColor;

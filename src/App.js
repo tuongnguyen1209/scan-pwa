@@ -13,7 +13,7 @@ const App = () => {
   const [pageNum, setPageNum] = useState(1);
   const [base64, setBase64] = useState("");
 
-  const [color, err, isSearch] = imgToList(base64);
+  const [color, err, text] = imgToList(base64);
 
   const handlGetText = (base) => {
     setBase64(base);
@@ -70,8 +70,8 @@ const App = () => {
           >
             <ColorInformation
               colorinfo={color}
-              errSearch={err}
-              isSearch={isSearch}
+              errCode={err}
+              text={text}
               handCancle={handCancle}
               handlChangePage={handlChangePage}
               pageNum={pageNum}

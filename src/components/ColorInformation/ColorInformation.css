@@ -42,6 +42,8 @@
   color: rgb(75, 72, 72);
   font-size: 1.1em;
   line-height: 1.5em;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .grid {
   padding: 5px;
