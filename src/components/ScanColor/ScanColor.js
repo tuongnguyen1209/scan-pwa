@@ -36,7 +36,6 @@ function ScanColor(props) {
   };
 
   useEffect(() => {
-    console.log(touch);
     if (
       touch.start > touch.end &&
       touch.end > 0 &&
@@ -57,14 +56,14 @@ function ScanColor(props) {
     let context = canvasRef.current.getContext("2d");
     context.drawImage(
       videoRef.current,
-      videoRef.current.videoWidth * 0.2,
-      videoRef.current.videoHeight * 0.45,
+      videoRef.current.videoWidth * 0.1,
+      videoRef.current.videoHeight * 0.3,
       videoRef.current.videoWidth * 0.8,
-      videoRef.current.videoHeight * 0.1,
+      videoRef.current.videoHeight * 0.25,
       0,
       0,
       (canvasRef.current.width = videoRef.current.videoWidth * 0.8),
-      (canvasRef.current.height = videoRef.current.videoHeight * 0.1)
+      (canvasRef.current.height = videoRef.current.videoHeight * 0.25)
     );
 
     canvasRef.current.toBlob(
@@ -72,7 +71,7 @@ function ScanColor(props) {
       "image/webp",
       0.8
     );
-    props.handlChangePage(3);
+    // props.handlChangePage(3);
   };
 
   return (
@@ -84,7 +83,11 @@ function ScanColor(props) {
       <canvas
         ref={canvasRef}
         className="canvas"
-        style={{ width: "50%", position: "relative", display: "none" }}
+        style={{
+          width: "70%",
+          position: "relative",
+          // display: "none",
+        }}
       ></canvas>
       <div className="container">
         <div className="textContainer">

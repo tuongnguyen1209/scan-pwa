@@ -6,8 +6,8 @@ const isEmpty = (obj) => {
   return Object.keys(obj).length === 0;
 };
 
-const ImgToList = (base64) => {
-  const [listColor, setListColor] = useState([]);
+const ImgToColor = (base64) => {
+  const [color, setColor] = useState({});
   const [err, setErr] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [text, setText] = useState("");
@@ -35,7 +35,6 @@ const ImgToList = (base64) => {
           setErr("Can not scan the text, please try again");
           setIsSearch(false);
         } else {
-          console.log(response.responses[0].fullTextAnnotation.text.trim());
           setText(response.responses[0].fullTextAnnotation.text.trim());
         }
       });
@@ -45,7 +44,7 @@ const ImgToList = (base64) => {
       setText("");
       setErr("");
       setIsSearch(false);
-      setListColor([]);
+      setColor({});
     };
   }, [base64]);
 
@@ -53,29 +52,15 @@ const ImgToList = (base64) => {
     if (text !== "") {
       ColorApi.getColor(text)
         .then((data) => {
+          console.log("data--", data);
           let result = data.result;
-
-          let list = [];
-          list = data.sugestion.Colors;
-          if (result === null && list.length === 0) {
+          console.log(result);
+          if (result === null) {
             setErr(`Can not find any results with keywords ${text}`);
             setIsSearch(false);
           } else {
-            let index =
-              list.length > 0 && result !== null
-                ? list.findIndex((e) => e._id === result._id)
-                : -1;
-            const newList = [];
-            if (index < 0 && result !== null) newList.push(result);
-            newList.push(...list);
-            if (newList.length === 0) {
-              setErr(`Can not find any results with keywords ${text}`);
-              setIsSearch(false);
-              return "";
-            }
-            console.log("new list", newList);
             setIsSearch(false);
-            setListColor(newList);
+            setColor(result);
           }
         })
         .catch((err) => {
@@ -88,7 +73,7 @@ const ImgToList = (base64) => {
     }
   }, [text]);
 
-  return [listColor, err, isSearch];
+  return [color, err, isSearch];
 };
 
-export default ImgToList;
+export default ImgToColor;

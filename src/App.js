@@ -1,15 +1,10 @@
-import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import { animateFade, transition } from "./Animation/Animation";
 import ColorInformation from "./components/ColorInformation/ColorInformation";
-import ListColor from "./components/ListColor/ListColor";
 import ScanColor from "./components/ScanColor/ScanColor";
 import SplashScreen from "./components/SplashScreen/SplashScreen";
-import {
-  animateFade,
-  animateSlideToTop,
-  transition,
-} from "./Animation/Animation";
-import imgToList from "./hooks/use_imgtolist.js";
+import imgToList from "./hooks/use_imgToColor";
 import "./index.css";
 
 const App = () => {
@@ -17,9 +12,8 @@ const App = () => {
 
   const [pageNum, setPageNum] = useState(1);
   const [base64, setBase64] = useState("");
-  const [color, setColor] = useState({});
 
-  const [listColor, err, isSearch] = imgToList(base64);
+  const [color, err, isSearch] = imgToList(base64);
 
   const handlGetText = (base) => {
     setBase64(base);
@@ -27,14 +21,7 @@ const App = () => {
   const handCancle = () => {
     setBase64("");
 
-    setColor({});
-
     handlChangePage(2);
-  };
-  const handlClickColor = (id) => {
-    let index = listColor.findIndex((e) => e._id === id);
-    console.log(id, index);
-    setColor(listColor[index]);
   };
 
   const handlChangePage = (page) => {
@@ -72,32 +59,13 @@ const App = () => {
             />
           </motion.div>
         )}
+
         {pageNum === 3 && (
           <motion.div
             initial="out"
             animate="in"
-            exit="out"
-            transition={transition}
-            variants={animateFade}
-            key={pageNum}
-          >
-            <ListColor
-              listItemColor={listColor}
-              isSearch={isSearch}
-              handCancle={handCancle}
-              err={err}
-              handlClickColor={handlClickColor}
-              handlChangePage={handlChangePage}
-              pageNum={pageNum}
-            />
-          </motion.div>
-        )}
-        {pageNum === 4 && (
-          <motion.div
-            initial="out"
-            animate="in"
             exit="exit"
-            variants={animateSlideToTop}
+            variants={animateFade}
             key={pageNum}
           >
             <ColorInformation

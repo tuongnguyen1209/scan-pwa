@@ -38,7 +38,7 @@
   background-color: #ffffff;
   overflow-y: auto;
 }
-.content-bottom h1 {
+.content-bottom p {
   color: rgb(75, 72, 72);
   font-size: 1.1em;
   line-height: 1.5em;
@@ -108,28 +108,4 @@
   .colorinfomation .content-bottom .image-container {
     width: 20%;
   }
-}
-
-.slidetotop-enter {
-  z-index: 20;
-  opacity: 0;
-  transform: translateY(100%);
-}
-
-.slidetotop-enter-active {
-  opacity: 1;
-  transform: translateY(0%);
-  transition: opacity 400ms ease, transform 400ms ease;
-}
-
-.slidetotop-exit {
-  z-index: 20;
-  opacity: 1;
-  transform: translateY(0%);
-}
-
-.slidetotop-exit-active {
-  opacity: 0.01;
-  transform: translateY(100%);
-  transition: opacity 4000ms ease, transform 4000ms ease;
 }
