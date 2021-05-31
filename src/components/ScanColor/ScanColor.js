@@ -71,7 +71,7 @@ function ScanColor(props) {
       "image/webp",
       0.8
     );
-    // props.handlChangePage(3);
+    props.handlChangePage(3);
   };
 
   return (
@@ -86,7 +86,7 @@ function ScanColor(props) {
         style={{
           width: "70%",
           position: "relative",
-          // display: "none",
+          display: "none",
         }}
       ></canvas>
       <div className="container">
