@@ -116,7 +116,6 @@ function ColorInformation(props) {
                         stade du projet. <br />
                         -La référence scannée comporte trop ou pas assez de
                         texte afin d’être reconnue par notre application. <br />
-                        `
                       </p>
                     )}
                   </div>
