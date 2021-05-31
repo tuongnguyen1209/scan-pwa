@@ -1,4 +1,5 @@
 import React from "react";
+import PWAPrompt from "react-ios-pwa-prompt";
 import logo from "../../assets/img/color.png";
 import ronin from "../../assets/img/ronin.png";
 import scanBtn from "../../assets/img/scan.png";
@@ -22,9 +23,16 @@ function SplashScreen(props) {
           </div>
         </div>
         <div className="wrap-footer">
-          <img className="btn-footer" src={ronin} alt="scan" />
+          <img className="btn-footer" src={ronin} alt="footer" />
         </div>
       </div>
+      <PWAPrompt
+        promptOnVisit={3}
+        timesToShow={1}
+        copyClosePrompt="Close"
+        copyBody="This website has app functionality. Add it to your home screen to use it in fullscreen."
+        permanentlyHideOnDismiss={false}
+      />
     </div>
   );
 }

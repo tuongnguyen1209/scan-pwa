@@ -1,11 +1,9 @@
 .splashScreen {
   width: 30%;
   margin: auto;
-  max-height: 100vh;
-  height: 100vh;
 }
 .main-spash-screen {
-  width: 100%;
+  /* display: -webkit-flex; */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,46 +12,30 @@
 }
 .wrap-logo {
   width: 70%;
-  margin: auto;
-}
-@keyframes animatelog {
-  0% {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  100% {
-    position: static;
-  }
-}
-.wrap-btn-scan {
-  width: 30%;
-  margin: auto;
-  animation-name: animatebtn;
-  animation-duration: 4s;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  position: absolute;
 }
 
-@keyframes animatebtn {
-  0% {
-    display: none;
-  }
-  90% {
-    display: none;
-  }
-  100% {
-    display: block;
-  }
+.wrap-btn-scan {
+  width: 30%;
+  display: flex;
+  justify-content: center;
 }
 .wrap-btn-scan .btn-scan {
   cursor: pointer;
 }
 .wrap-footer {
   width: 50%;
+  bottom: 0;
   margin: auto;
+  display: flex;
+  position: absolute;
+  justify-content: center;
 }
 img {
-  width: 100%;
+  max-width: 100%;
 }
 @media only screen and (max-width: 1024px) {
   .splashScreen {

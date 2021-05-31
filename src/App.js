@@ -1,15 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ColorInformation from "./components/ColorInformation/ColorInformation";
+import ListColor from "./components/ListColor/ListColor";
+import ScanColor from "./components/ScanColor/ScanColor";
+import SplashScreen from "./components/SplashScreen/SplashScreen";
 import {
   animateFade,
   animateSlideToTop,
   transition,
 } from "./Animation/Animation";
-
-import ColorInformation from "./components/ColorInformation/ColorInformation";
-import ListColor from "./components/ListColor/ListColor";
-import ScanColor from "./components/ScanColor/ScanColor";
-import SplashScreen from "./components/SplashScreen/SplashScreen";
 import imgToList from "./hooks/use_imgtolist.js";
 import "./index.css";
 
@@ -32,12 +31,10 @@ const App = () => {
 
     handlChangePage(2);
   };
-
   const handlClickColor = (id) => {
     let index = listColor.findIndex((e) => e._id === id);
     console.log(id, index);
     setColor(listColor[index]);
-    handlChangePage(4);
   };
 
   const handlChangePage = (page) => {
@@ -46,12 +43,12 @@ const App = () => {
 
   return (
     <div id="app">
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter key={pageNum}>
         {pageNum === 1 && (
           <motion.div
             initial="out"
             animate="in"
-            // exit="out"
+            exit="out"
             variants={animateFade}
             transition={transition}
             key={pageNum}
@@ -100,7 +97,6 @@ const App = () => {
             initial="out"
             animate="in"
             exit="exit"
-            // transition={transition}
             variants={animateSlideToTop}
             key={pageNum}
           >

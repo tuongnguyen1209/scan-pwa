@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React from "react";
+import ChangeColorText from "../../hooks/use_changeColorText";
 import close from "../../assets/img/close.png";
 import loading from "../../assets/img/loading.gif";
-import ChangeColorText from "../../hooks/use_changeColorText";
 import "./ListColor.css";
 
 ListColor.propTypes = {
@@ -16,19 +16,17 @@ ListColor.propTypes = {
 function ListColor(props) {
   const { listItemColor, isSearch, err, handlClickColor, handCancle } = props;
 
-  useEffect(() => {
-    if (err !== "") {
-      props.handlChangePage(4);
-    }
-    if (listItemColor.length === 1) {
-      handlClickColor(listItemColor[0]._id);
-      props.handlChangePage(4);
-    }
-  }, [err, listItemColor]);
+  if (listItemColor.length === 1) {
+    handlClickColor(listItemColor[0]._id);
+    props.handlChangePage(4);
+  }
+
+  if (err !== "") {
+    props.handlChangePage(4);
+  }
 
   const handlClick = (id) => {
     handlClickColor(id);
-
     props.handlChangePage(4);
   };
   return (
@@ -61,11 +59,7 @@ function ListColor(props) {
                     }}
                   >
                     <div to="information" className="link-to-info">
-                      <div
-                        style={{
-                          color: ChangeColorText(e.hexCode.trim()),
-                        }}
-                      >
+                      <div style={{ color: ChangeColorText(e.hexCode) }}>
                         {e.name}
                       </div>
                     </div>

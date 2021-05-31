@@ -15,6 +15,5 @@ const ChangeColorText = (hex) => {
   } else {
     return "white";
   }
-  return "";
 };
 export default ChangeColorText;
