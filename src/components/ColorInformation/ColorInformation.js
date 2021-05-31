@@ -97,7 +97,7 @@ function ColorInformation(props) {
               <div className="grid">
                 <div className="row">
                   <div className="col ">
-                    {errCode === 0 && <p> `${colorinfo.desc}` </p>}
+                    {errCode === 0 && <p> {colorinfo.desc} </p>}
                     {errCode === 1 && (
                       <p>
                         Pour une reconnaissance optimale du texte, veuillez:
