@@ -133,7 +133,7 @@ function ColorInformation(props) {
                     )}
                     {errCode === 2 && (
                       <p>
-                        L’application a détecté la référence suivante : ${text}
+                        L’application a détecté la référence suivante : {text}
                         mais n’a trouvé aucune correspondance dans sa base de
                         données. Une des raisons peut être la suivante : <br />
                         -La base de données ne contient pas cette référence à ce
