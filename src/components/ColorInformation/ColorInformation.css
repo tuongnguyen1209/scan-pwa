@@ -33,7 +33,7 @@
   bottom: 0;
   display: block;
   width: 100%;
-  height: 40vh;
+  height: 50vh;
   contain: layout size style;
   background-color: #ffffff;
   overflow-y: auto;
@@ -97,11 +97,12 @@
   z-index: 10;
   left: 50%;
   transform: translateX(-50%);
-  /* width: 20%; */
+  width: 20%;
+  max-width: 95px;
 }
 .btn-cart {
   position: relative;
-  width: 95px;
+  /* width: 95px; */
   margin-right: auto;
   margin-left: auto;
   /* margin-top: 20px; */
@@ -109,7 +110,7 @@
   cursor: pointer;
 }
 @media only screen and (max-width: 1024px) {
-  .colorinfomation .content-bottom .image-container {
+  .colorinfomation .content-bottom .image-container1 {
     width: 20%;
   }
 }

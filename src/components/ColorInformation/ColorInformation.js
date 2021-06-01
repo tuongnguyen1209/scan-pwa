@@ -94,7 +94,7 @@ function ColorInformation(props) {
                     style={{
                       background: `${
                         ChangeColorText(colorinfo.hexCode) === "black"
-                          ? "black"
+                          ? "#6b8129"
                           : ""
                       }`,
                     }}
