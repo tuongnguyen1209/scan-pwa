@@ -1,14 +1,24 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { animateSlideToTop } from "../../Animation/Animation";
+import { animateSlideToTop, transition } from "../../Animation/Animation";
 import cart from "../../assets/img/cart.png";
 import close from "../../assets/img/close.png";
 import loading from "../../assets/img/loading.gif";
 import ChangeColorText from "../../hooks/use_changeColorText";
+import Notify from "../Notify/Notify";
 import "./ColorInformation.css";
 
 function ColorInformation(props) {
   const { colorinfo, errCode, handCancle, text } = props;
+
+  const [cartIsShown, setCartIsShown] = useState(false);
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
+
   const errorText = {
     notResult: "Aucune correspondance trouvée",
     notTex: "Nous n’avons pas pu lire votre référence. Merci de recommencer.",
@@ -43,6 +53,8 @@ function ColorInformation(props) {
 
   return (
     <React.Fragment>
+      {cartIsShown && <Notify onClose={hideCartHandler} />}
+
       {errCode === -1 && (
         <div className="loading">
           <img src={loading} alt="Loading" />
@@ -53,6 +65,7 @@ function ColorInformation(props) {
           initial="out"
           animate="in"
           exit="exit"
+          transition={transition}
           variants={animateSlideToTop}
         >
           <div
@@ -74,7 +87,18 @@ function ColorInformation(props) {
             >
               <div className="image-container-close">
                 <div to="scan" onClick={handCancle}>
-                  <img className="btn-close" src={close} alt="cart" />
+                  <img
+                    className="btn-close"
+                    src={close}
+                    alt="cart"
+                    style={{
+                      background: `${
+                        ChangeColorText(colorinfo.hexCode) === "black"
+                          ? "black"
+                          : ""
+                      }`,
+                    }}
+                  />
                 </div>
               </div>
               <div className="grid">
@@ -124,7 +148,12 @@ function ColorInformation(props) {
             </div>
             {errCode === 0 && (
               <div className="image-container1">
-                <img className="btn-cart" src={cart} alt="cart" />
+                <img
+                  className="btn-cart"
+                  src={cart}
+                  alt="cart"
+                  onClick={showCartHandler}
+                />
               </div>
             )}
           </div>
