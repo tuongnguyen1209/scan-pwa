@@ -98,11 +98,10 @@
   left: 50%;
   transform: translateX(-50%);
   width: 20%;
-  max-width: 95px;
 }
 .btn-cart {
   position: relative;
-  /* width: 95px; */
+  width: 80px;
   margin-right: auto;
   margin-left: auto;
   /* margin-top: 20px; */
